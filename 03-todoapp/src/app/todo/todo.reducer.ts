@@ -1,7 +1,6 @@
 import * as fromTodo from './todo.actions';
 import { Todo } from './todo.model';
 
-
 const todo1 = new Todo('Vencer a Thanos');
 const todo2 = new Todo('Salvar el mundo');
 
@@ -41,6 +40,13 @@ export function todoReducer(state = estadoInicial,
       });
     case fromTodo.BORRAR_TODO:
       return state.filter( todoEdit => todoEdit.id !== action.id );
+    case fromTodo.TOGGLE_ALL_TODO:
+      return state.map( todoEdit => {
+        return {
+          ...todoEdit,
+          completado: action.completado
+        };
+      });
     default:
       return state;
   }
