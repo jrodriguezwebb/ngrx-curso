@@ -5,6 +5,8 @@ import { Todo } from './todo.model';
 const todo1 = new Todo('Vencer a Thanos');
 const todo2 = new Todo('Salvar el mundo');
 
+todo2.completado = true;
+
 const estadoInicial: Todo[] = [todo1, todo2];
 
 export function todoReducer(state = estadoInicial,
@@ -13,6 +15,32 @@ export function todoReducer(state = estadoInicial,
     case fromTodo.AGREGAR_TODO:
       const todo = new Todo(action.texto);
       return [ ...state, todo ];
+    case fromTodo.TOGGLE_TODO:
+      return state.map( todoEdit => {
+        if (todoEdit.id === action.id) {
+          // change this for tassign
+          return {
+            ...todoEdit,
+            completado: !todoEdit.completado
+          };
+        } else {
+          return todoEdit;
+        }
+      });
+    case fromTodo.EDITAR_TODO:
+      return state.map( todoEdit => {
+        if (todoEdit.id === action.id) {
+          // change this for tassign
+          return {
+            ...todoEdit,
+            texto: action.texto
+          };
+        } else {
+          return todoEdit;
+        }
+      });
+    case fromTodo.BORRAR_TODO:
+      return state.filter( todoEdit => todoEdit.id !== action.id );
     default:
       return state;
   }
