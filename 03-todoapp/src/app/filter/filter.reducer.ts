@@ -1,6 +1,4 @@
 import * as fromFiltro from './filter.actions';
-import { from } from 'rxjs';
-
 
 const estadoInicial: fromFiltro.filtrosValidos = 'todos';
 

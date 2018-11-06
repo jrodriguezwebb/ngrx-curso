@@ -11,6 +11,7 @@ import { TodoFooterComponent } from './todo/todo-footer/todo-footer.component';
 import { TodoItemComponent } from './todo/todo-item/todo-item.component';
 import { TodoComponent } from './todo/todo.component';
 import { TodosListComponent } from './todo/todos-list/todos-list.component';
+import { FilterPipe } from './filter/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { TodosListComponent } from './todo/todos-list/todos-list.component';
     TodosListComponent,
     TodoFooterComponent,
     TodoItemComponent,
-    TodoAddComponent
+    TodoAddComponent,
+    FilterPipe
   ],
   imports: [
     BrowserModule,
