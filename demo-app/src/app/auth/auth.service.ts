@@ -14,12 +14,15 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { AppState } from '../app.reducer';
 import { ActivarLoadingAction, DesactivarLoadingAction } from '../shared/ui.actions';
+import { SetUserAction } from './auth.actions';
+import { Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
+  private userSubscription: Subscription;
   constructor( private afAuth: AngularFireAuth,
                private router: Router,
                private afDB: AngularFirestore,
@@ -30,9 +33,14 @@ export class AuthService {
 
     this.afAuth.authState.subscribe((fbUser: firebase.User) => {
       if (fbUser) {
-        this.afDB.doc(`${ fbUser.uid}/usuario`).valueChanges().subscribe( usuarioObj => {
-          console.log(usuarioObj);
+        this.userSubscription = this.afDB.doc(`${ fbUser.uid}/usuario`).valueChanges().subscribe( (usuarioObj: any) => {
+          const newUser = new User(usuarioObj);
+          this.store.dispatch( new SetUserAction(newUser));
         });
+      } else {
+        if (this.userSubscription) {
+          this.userSubscription.unsubscribe();
+        }
       }
     });
 
