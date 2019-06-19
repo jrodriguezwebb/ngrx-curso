@@ -1,6 +1,3 @@
-
-
-
 export class User {
 
     public nombre: string;
@@ -12,9 +9,7 @@ export class User {
         this.uid = obj && obj.uid || null;
         this.email = obj && obj.email || null;
     }
-
 }
-
 interface DataObj {
     uid: string;
     email: string;

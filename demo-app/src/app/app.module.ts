@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 // Modulos
 import { AppRoutingModule } from './app-routing.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // NgRx
 import { StoreModule } from '@ngrx/store';
@@ -46,6 +46,7 @@ import { SidebarComponent } from './shared/sidebar/sidebar.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(appReducers),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     AngularFireModule.initializeApp(environment.firebase),
